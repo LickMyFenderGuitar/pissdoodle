@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LWJGL Output</title>
+</head>
+<body>
+    <canvas id='canvas' width='800' height='600'></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const ws = new WebSocket('ws://' + window.location.hostname + ':8081');
+        
+        ws.onopen = function() {
+            console.log('WebSocket connection opened');
+        };
+        
+        ws.onerror = function(error) {
+            console.error('WebSocket error:', error);
+        };
+        
+        ws.onmessage = function(event) {
+            console.log('WebSocket message received:', event.data);
+            const img = new Image();
+            img.src = 'data:image/png;base64,' + event.data;
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0);
+            };
+        };
+    </script>
+</body>
+</html>
