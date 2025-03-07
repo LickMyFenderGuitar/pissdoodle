@@ -1,0 +1,14 @@
+mod system;
+
+class output:
+    fn function1(string) {
+        return 0;
+    }
+
+    public fn function2() {
+        return 0;
+    }
+
+    private fn function3() {
+        return 0;
+    }
